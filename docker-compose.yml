@@ -1,0 +1,36 @@
+services:
+  proxy:
+    image: ${NEXI_OPI_PROXY_IMAGE:-ghcr.io/richiehug/nexi-opi-proxy:1.0.0}
+    restart: unless-stopped
+    env_file:
+      - .env
+    ports:
+      - "${PUBLISHED_HOST:-127.0.0.1}:${PORT:-3001}:${PORT:-3001}"
+      - "${DEVICE_CHANNEL1_PUBLISHED_HOST:-0.0.0.0}:${DEVICE_CHANNEL1_PUBLIC_PORT:-4102}:4102"
+    volumes:
+      - ./.env:/app/.env:ro
+      - ./config:/app/config
+      - ./data:/app/data
+      - ./logs:/app/logs
+      - ./certs:/app/certs
+    command: ["node", "src/index.js", "serve"]
+
+  auth-init:
+    image: ${NEXI_OPI_PROXY_IMAGE:-ghcr.io/richiehug/nexi-opi-proxy:1.0.0}
+    profiles: ["tools"]
+    env_file:
+      - .env
+    volumes:
+      - ./.env:/app/.env:ro
+      - ./config:/app/config
+      - ./data:/app/data
+      - ./logs:/app/logs
+      - ./certs:/app/certs
+    command: ["node", "src/index.js", "auth", "init"]
+
+  tls-init-dev:
+    image: ${NEXI_OPI_PROXY_IMAGE:-ghcr.io/richiehug/nexi-opi-proxy:1.0.0}
+    profiles: ["tools"]
+    volumes:
+      - ./certs:/app/certs
+    command: ["node", "src/index.js", "tls", "init-dev"]
