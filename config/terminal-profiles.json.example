@@ -1,0 +1,24 @@
+{
+  "rx5000-default": {
+    "terminalModel": "RX5000",
+    "defaults": {
+      "language": "en",
+      "currency": "CHF",
+      "receiptHandling": {
+        "customer": "external",
+        "merchant": "external"
+      }
+    }
+  },
+  "q30-default": {
+    "terminalModel": "Q30",
+    "defaults": {
+      "language": "en",
+      "currency": "CHF",
+      "receiptHandling": {
+        "customer": "local",
+        "merchant": "external"
+      }
+    }
+  }
+}

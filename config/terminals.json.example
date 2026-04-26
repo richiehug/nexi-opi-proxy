@@ -1,0 +1,14 @@
+{
+  "front-counter": {
+    "terminalModel": "RX5000",
+    "terminalProfile": "rx5000-default",
+    "displayName": "Front Counter",
+    "ip": "192.168.0.50"
+  },
+  "lane-2": {
+    "terminalModel": "Q30",
+    "terminalProfile": "q30-default",
+    "displayName": "Lane 2",
+    "ip": "192.168.0.51"
+  }
+}
